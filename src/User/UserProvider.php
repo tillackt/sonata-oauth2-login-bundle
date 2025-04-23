@@ -22,12 +22,18 @@ final class UserProvider implements OAuthAwareUserProviderInterface, UserProvide
     ) {
     }
 
+    public function loadUserByIdentifier(string $identifier): UserInterface
+    {
+        return $this->userManager->findUserByUsernameOrEmail($identifier);
+    }
+
     /**
      * {@inheritdoc}
+     * @deprecated since Symfony 5.3, use loadUserByIdentifier() instead
      */
     public function loadUserByUsername($username): UserInterface
     {
-        return $this->userManager->findUserByUsernameOrEmail($username);
+        return $this->loadUserByIdentifier($username);
     }
 
     /**
