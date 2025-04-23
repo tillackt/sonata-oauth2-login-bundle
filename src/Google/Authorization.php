@@ -2,14 +2,16 @@
 
 namespace SilasJoisten\Sonata\Oauth2LoginBundle\Google;
 
+use Google\Client;
+
 final class Authorization
 {
     public function __construct(
-        private \Google_Client $client
+        private Client $client
     ) {
     }
 
-    public function getClient(): \Google_Client
+    public function getClient(): Client
     {
         $this->client->setAccessType('offline');
 

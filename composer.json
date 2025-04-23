@@ -10,19 +10,19 @@
     }
   ],
   "require": {
-    "php": "^8.0",
+    "php": "^8.2",
     "google/apiclient": "^2.1",
-    "hwi/oauth-bundle": "^1.1",
+    "hwi/oauth-bundle": "^2.2.0",
     "php-http/guzzle6-adapter": "^2.0",
     "php-http/httplug": "^2.2",
     "sonata-project/user-bundle": "^4.7|^5.1",
     "twig/twig": "^3.0"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.15",
+    "friendsofphp/php-cs-fixer": "^3.11",
     "matthiasnoback/symfony-dependency-injection-test": "^4.0",
     "phpunit/phpunit": "^9.5",
-    "symfony/phpunit-bridge": "^4.3"
+    "symfony/phpunit-bridge": "^7.0"
   },
   "config": {
     "sort-packages": true
