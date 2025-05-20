@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php": "^8.0",
+    "php": "^8.3",
     "google/apiclient": "^2.1",
     "hwi/oauth-bundle": "2.0.0-BETA2",
     "php-http/guzzle6-adapter": "^2.0",

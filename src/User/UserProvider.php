@@ -18,7 +18,7 @@ final class UserProvider implements OAuthAwareUserProviderInterface, UserProvide
         private UserManagerInterface $userManager,
         private Email $emailChecker,
         private Authorization $authorization,
-        private array $defaultUserRoles
+        private array $defaultUserRoles,
     ) {
     }
 

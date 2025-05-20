@@ -6,7 +6,7 @@ final class Email
 {
     public function __construct(
         private array $validDomains,
-        private array $customEmailRoles = []
+        private array $customEmailRoles = [],
     ) {
     }
 

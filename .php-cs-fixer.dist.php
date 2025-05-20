@@ -5,11 +5,11 @@ $finder = PhpCsFixer\Finder::create()
     ->in('tests')
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
         'no_superfluous_phpdoc_tags' => true,
     ])
     ->setFinder($finder)
-;
+    ;

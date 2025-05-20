@@ -26,7 +26,7 @@ class EmailTest extends TestCase
     public function isEmailValidProvider(): array
     {
         return [
-           [true, 'test@hotmail.de'],
+            [true, 'test@hotmail.de'],
             [true, 'test@gmail.com'],
             [true, 'test@example.com'],
             [false, 'test@hotmail.com'],
