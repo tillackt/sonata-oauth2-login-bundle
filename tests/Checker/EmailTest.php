@@ -2,14 +2,13 @@
 
 namespace SilasJoisten\Sonata\Oauth2LoginBundle\Tests\Checker;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use SilasJoisten\Sonata\Oauth2LoginBundle\Checker\Email;
 
 class EmailTest extends TestCase
 {
-    /**
-     * @dataProvider isEmailValidProvider
-     */
+    #[DataProvider('isEmailValidProvider')]
     public function testIsEmailValid($expected, $email): void
     {
         $validEmailDomains = [
@@ -23,7 +22,7 @@ class EmailTest extends TestCase
         $this->assertSame($expected, $checker->isEmailValid($email));
     }
 
-    public function isEmailValidProvider(): array
+    public static function isEmailValidProvider(): array
     {
         return [
             [true, 'test@hotmail.de'],
@@ -37,9 +36,7 @@ class EmailTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider hasCustomRolesProvider
-     */
+    #[DataProvider('hasCustomRolesProvider')]
     public function testHasCustomRoles($expected, $email): void
     {
         $customEmails = [
@@ -52,7 +49,7 @@ class EmailTest extends TestCase
         $this->assertSame($expected, $checker->hasCustomRoles($email));
     }
 
-    public function hasCustomRolesProvider(): array
+    public static function hasCustomRolesProvider(): array
     {
         return [
             [true, 'bar.foo@goo.de'],
@@ -66,9 +63,7 @@ class EmailTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getCustomRolesProvider
-     */
+    #[DataProvider('getCustomRolesProvider')]
     public function testGetCustomRoles($expected, $email): void
     {
         $customEmails = [
@@ -82,7 +77,7 @@ class EmailTest extends TestCase
         $this->assertSame($expected, $checker->getCustomRoles($email));
     }
 
-    public function getCustomRolesProvider(): array
+    public static function getCustomRolesProvider(): array
     {
         return [
             [['ROLE_SUPER_ADMIN'], 'bar.foo@goo.de'],

@@ -24,10 +24,12 @@ final class UserProvider implements OAuthAwareUserProviderInterface, UserProvide
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated since Symfony 5.3, use loadUserByIdentifier() instead
      */
     public function loadUserByUsername($username): ?UserInterface
     {
-        return $this->userManager->findUserByUsernameOrEmail($username);
+        return $this->loadUserByIdentifier($username);
     }
 
     /**
@@ -79,7 +81,7 @@ final class UserProvider implements OAuthAwareUserProviderInterface, UserProvide
             throw new UnsupportedUserException(sprintf('Expected an instance of %s, but got "%s".', $this->userManager->getClass(), get_class($user)));
         }
 
-        return $this->loadUserByUsername($user->getUsername());
+        return $this->loadUserByIdentifier($user->getUserIdentifier());
     }
 
     /**
@@ -97,6 +99,6 @@ final class UserProvider implements OAuthAwareUserProviderInterface, UserProvide
      */
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        // TODO: Implement loadUserByIdentifier() method.
+        return $this->userManager->findUserByUsernameOrEmail($identifier);
     }
 }

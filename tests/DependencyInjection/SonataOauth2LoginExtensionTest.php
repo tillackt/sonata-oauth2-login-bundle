@@ -3,6 +3,7 @@
 namespace SilasJoisten\Sonata\Oauth2LoginBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use SilasJoisten\Sonata\Oauth2LoginBundle\DependencyInjection\SonataOauth2LoginExtension;
 
 /**
@@ -10,11 +11,7 @@ use SilasJoisten\Sonata\Oauth2LoginBundle\DependencyInjection\SonataOauth2LoginE
  */
 class SonataOauth2LoginExtensionTest extends AbstractExtensionTestCase
 {
-    /**
-     * @dataProvider availableSecurityProvider
-     * @dataProvider availableServicesProvider
-     * @dataProvider availableTwigExtensionsProvider
-     */
+    #[DataProvider('combinedServicesProvider')]
     public function testAvailableServices($service): void
     {
         $this->load();
@@ -22,14 +19,14 @@ class SonataOauth2LoginExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService($service);
     }
 
-    public function availableSecurityProvider(): array
+    public static function availableSecurityProvider(): array
     {
         return [
             ['sonata_oauth2_login.google.authorization'],
         ];
     }
 
-    public function availableServicesProvider(): array
+    public static function availableServicesProvider(): array
     {
         return [
             ['sonata_oauth2_login.checker.email'],
@@ -38,11 +35,20 @@ class SonataOauth2LoginExtensionTest extends AbstractExtensionTestCase
         ];
     }
 
-    public function availableTwigExtensionsProvider(): array
+    public static function availableTwigExtensionsProvider(): array
     {
         return [
             ['sonata_oauth2_login.twig.render_button_extension'],
         ];
+    }
+
+    public static function combinedServicesProvider(): array
+    {
+        return array_merge(
+            self::availableSecurityProvider(),
+            self::availableServicesProvider(),
+            self::availableTwigExtensionsProvider()
+        );
     }
 
     protected function getContainerExtensions(): array

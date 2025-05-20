@@ -23,7 +23,7 @@ final class Email
 
     public function hasCustomRoles(string $email): bool
     {
-        return isset($this->customEmailRoles[$email]) ?? false;
+        return isset($this->customEmailRoles[$email]);
     }
 
     public function getCustomRoles(string $email): array
