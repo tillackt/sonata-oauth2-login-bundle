@@ -7,7 +7,7 @@ use Google\Client;
 final class Authorization
 {
     public function __construct(
-        private Client $client
+        private Client $client,
     ) {
     }
 
