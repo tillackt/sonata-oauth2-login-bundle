@@ -7,37 +7,28 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('sonata_oauth2_login');
-
-        // Keep compatibility with symfony/config < 4.2
-        if (!method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->root('sonata_admin');
-        } else {
-            $rootNode = $treeBuilder->getRootNode();
-        }
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
                 ->arrayNode('default_user_roles')
                     ->info('Used for user creation after success validation')
                     ->example('ROLE_SONATA_ADMIN')
-                    ->prototype('scalar')->end()
+                    ->scalarPrototype()->end()
                 ->end()
                 ->arrayNode('valid_email_domains')
                     ->info('Needed for email domain validation')
                     ->example('@example.com')
-                    ->prototype('scalar')->end()
+                    ->scalarPrototype()->end()
                 ->end()
                 ->arrayNode('custom_emails')
                     ->defaultValue([])
                     ->info('Customize Emails with specific role')
-                    ->prototype('array')
-                        ->prototype('scalar')->end()
+                    ->arrayPrototype()
+                        ->scalarPrototype()->end()
                     ->end()
                 ->end()
             ->end()

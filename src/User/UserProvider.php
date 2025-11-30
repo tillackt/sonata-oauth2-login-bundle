@@ -9,6 +9,7 @@ use SilasJoisten\Sonata\Oauth2LoginBundle\Google\Authorization;
 use Sonata\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -99,6 +100,13 @@ final class UserProvider implements OAuthAwareUserProviderInterface, UserProvide
      */
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        return $this->userManager->findUserByUsernameOrEmail($identifier);
+        $user = $this->userManager->findUserByUsernameOrEmail($identifier);
+        if (!$user instanceof UserInterface) {
+            $ex = new UserNotFoundException(sprintf('User "%s" not found.', $identifier));
+            $ex->setUserIdentifier($identifier);
+            throw $ex;
+        }
+
+        return $user;
     }
 }
